@@ -1,0 +1,2 @@
+release: python manage.py migrate
+web: gunicorn postv3.wsgi --log-file - 
