@@ -181,7 +181,7 @@ class MyPostsListView(View):
             menu_items.append(
                 MenuItem(description='You currently have no posts.')
             )
-        content = Menu(body=menu_items)
+        content = Menu(body=menu_items, footer='Reply MENU')
         
         return self.to_response(content)
 
