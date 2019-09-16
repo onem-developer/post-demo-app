@@ -21,8 +21,8 @@ from django.views.generic import View as _View
 from django.shortcuts import get_object_or_404
 
 from onemsdk.schema.v1 import (
-    Response, Menu, MenuItem, MenuItemType, Form, FormItemContent, FormItemMenu,
-    FormItemContentType, FormItemMenuItem, FormItemMenuItemType, FormMeta
+    Response, Menu, MenuItem, MenuItemType, MenuItemFormItem, Form, FormItem,
+    FormItemType, FormMeta
 )
 
 from .models import Post
@@ -56,11 +56,11 @@ class HomeView(View):
         user = self.get_user()
         if user.username == '':
             form_items = [
-                FormItemContent(type=FormItemContentType.string,
-                                name='username',
-                                description='Please choose a username',
-                                header='MENU',
-                                footer='Send username')
+                FormItem(type=FormItemType.string,
+                         name='username',
+                         description='Please choose a username',
+                         header='MENU',
+                         footer='Send username')
             ]
             content = Form(body=form_items,
                            method='POST',
@@ -109,21 +109,23 @@ class AddPostView(View):
 
     def get(self, request):
         form_items = [
-            FormItemContent(type=FormItemContentType.string,
+            FormItem(type=FormItemType.string,
                      name='title',
                      description='Give your new post a title (maximum 64 characters)',
                      header='add',
                      footer='Reply with post title or BACK'),
-            FormItemContent(type=FormItemContentType.string,
+            FormItem(type=FormItemType.string,
                      name='description',
                      description='Send post content (max 50 words)',
                      header='add',
                      footer='Reply with post content or BACK'),
-            FormItemMenu(body=[FormItemMenuItem(description='Private (share code)',
-                                                value='True'),
-                               FormItemMenuItem(description='Public (everyone)',
-                                                value='False')],
-                         name='is_private')
+             FormItem(type=FormItemType.form_menu,
+                      description='Select post privacy:',
+                      body=[MenuItemFormItem(description='Private (share code)',
+                                             value='True'),
+                            MenuItemFormItem(description='Public (everyone)',
+                                             value='False')],
+                       name='is_private')
         ]
         form = Form(body=form_items,
                     method='POST',
@@ -267,7 +269,7 @@ class SearchWizardView(View):
 
     def get(self, request):
         form_items = [
-            FormItemContent(type=FormItemContentType.string,
+            FormItem(type=FormItemType.string,
                      name='keyword',
                      description='Send code or keyword to search',
                      header='search',

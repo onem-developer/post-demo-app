@@ -19,8 +19,7 @@ from django.urls import reverse
 from django.views.generic import View as _View
 
 from onemsdk.schema.v1 import (
-    Response, Menu, MenuItem, Form, FormItemContent, FormItemContentType,
-    FormMeta
+    Response, Menu, MenuItem, Form, FormItem, FormItemType, FormMeta
 )
 
 
@@ -52,7 +51,7 @@ class HomeView(View):
         user = self.get_user()
         if user.username == '':
             form_items = [
-                FormItemContent(type=FormItemContentType.string,
+                FormItem(type=FormItemType.string,
                                 name='username',
                                 description='Please choose a username',
                                 header='MENU',
@@ -92,12 +91,12 @@ class AddPostView(View):
 
     def get(self, request):
         form_items = [
-            FormItemContent(type=FormItemContentType.string,
+            FormItem(type=FormItemType.string,
                      name='title',
                      description='Give your new post a title (maximum 64 characters)',
                      header='add',
                      footer='Reply with post title or BACK'),
-            FormItemContent(type=FormItemContentType.string,
+            FormItem(type=FormItemType.string,
                      name='description',
                      description='Send post content (max 50 words)',
                      header='add',
