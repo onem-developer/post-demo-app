@@ -357,7 +357,7 @@ class SendMessageView(View):
         post = get_object_or_404(Post, id=id)
 
         headers = {'X-API-KEY': settings.APP_APIKEY, 'Content-Type': 'application/json'}
-        notify_url = settings.RESTD_API_NOTIFY_URL.format(post.user.id)
+        notify_url = settings.ONEM_API_NOTIFY_URL.format(post.user.id)
         body = {
             'header': 'postv3 - {}'.format(post.title[:13]),
             'body': u'\n'.join([message, 'Sent by: {}'.format(self.get_user().username)]),

@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'ttgfg&)=_wx!274!ie5pfsxe-%87b48dkh$hl*fb$#!45c(j9@'
 
 # restdapi URL and api key
-RESTD_API_NOTIFY_URL = 'https://developer-api-poc.onem.zone/api/v1/users/{}/notify'
+ONEM_API_NOTIFY_URL = 'https://developer-api-poc.onem.zone/api/v1/users/{}/notify'
 APP_APIKEY = 'W6LmGDsM.eca6e9e1-df2c-4307-bd75-6299a74e32f8'
 
 
