@@ -72,3 +72,5 @@ target/
 # PyCharm
 .idea/
 .project
+
+postv3/settings/local.py
